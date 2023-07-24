@@ -8,20 +8,29 @@
 
 void setup() {
   
+  // Serial.begin(115200); //USB가 사용하고 있음. -> F12에서 보면 
+  Serial1.begin(115200,SERIAL_8N1,43,44); //PIN Rx 36, TX 37 아니면 IO = Rx 44,Tx 43 
+
   pinMode(FLOW_485,OUTPUT);
   pinMode(POWER_CTR,OUTPUT);
   digitalWrite(POWER_CTR,HIGH);
-
+  
 }
 
 void loop() {
+  
+  // if(Serial1.available()){
+  //   Serial.println("ok");
+  //   delay(100);    
+  // }
 
-  tone(MOTOR_CTR,500,500);
-  delay(500);
-  tone(MOTOR_CTR,600,500);
-  delay(500);
-  tone(MOTOR_CTR,700,500);
-  delay(500);
-  tone(MOTOR_CTR,800,500);
-  delay(500);
+  // else {
+  //   Serial.println("no");
+  //   delay(100);
+  // }
+
+  Serial1.println('a');
+  Serial1.write('A');
+  delay(100);
+
 }
