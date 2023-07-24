@@ -5,7 +5,8 @@
 #define LED_DATA 6
 #define MOTOR_CTR 12
 
-int battery_volt;
+float battery_volt;
+int SenseVolt;
 
 void setup() {
   
@@ -17,6 +18,10 @@ void setup() {
 }
 
 void loop() {
-  battery_volt = analogRead(BAT_CHECK);
+
+  SenseVolt = analogRead(BAT_CHECK);
+  battery_volt = (SenseVolt/4095)*3.286;
+
   Serial.println(battery_volt);
+  delay(100);
 }
