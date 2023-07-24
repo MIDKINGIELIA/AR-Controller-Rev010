@@ -9,7 +9,7 @@
 void setup() {
   
   // Serial.begin(115200); //USB가 사용하고 있음. -> F12에서 보면 
-  Serial1.begin(115200,SERIAL_8N1,43,44); //PIN Rx 36, TX 37 아니면 IO = Rx 44,Tx 43 
+  Serial1.begin(115200,SERIAL_8N1,44,43); //PIN Rx 36, TX 37 아니면 IO = Rx 44,Tx 43 
 
   pinMode(FLOW_485,OUTPUT);
   pinMode(POWER_CTR,OUTPUT);
@@ -29,8 +29,8 @@ void loop() {
   //   delay(100);
   // }
 
-  Serial1.println('a');
-  Serial1.write('A');
+  Serial1.print('A');
+
   delay(100);
 
 }
