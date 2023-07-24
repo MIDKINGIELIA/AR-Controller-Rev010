@@ -5,9 +5,11 @@
 #define LED_DATA 6
 #define MOTOR_CTR 12
 
+int battery_volt;
 
 void setup() {
   
+  Serial.begin(115200);  
   pinMode(FLOW_485,OUTPUT);
   pinMode(POWER_CTR,OUTPUT);
   digitalWrite(POWER_CTR,HIGH);
@@ -15,13 +17,6 @@ void setup() {
 }
 
 void loop() {
-
-  tone(MOTOR_CTR,500,500);
-  delay(500);
-  tone(MOTOR_CTR,600,500);
-  delay(500);
-  tone(MOTOR_CTR,700,500);
-  delay(500);
-  tone(MOTOR_CTR,800,500);
-  delay(500);
+  battery_volt = analogRead(BAT_CHECK);
+  Serial.println(battery_volt);
 }
