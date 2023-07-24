@@ -7,9 +7,10 @@
 
 
 void setup() {
+  
   pinMode(FLOW_485,OUTPUT);
   pinMode(POWER_CTR,OUTPUT);
-
+  digitalWrite(POWER_CTR,HIGH);
 
 }
 
