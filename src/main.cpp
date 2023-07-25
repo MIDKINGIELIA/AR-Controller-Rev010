@@ -4,34 +4,39 @@
 #define POWER_CTR 7
 #define LED_DATA 6
 #define MOTOR_CTR 12
+#define Trig_SW 42
+#define Check_SW 41
+
+int Trig, Check =0;
+
 
 
 void setup() {
   
-  // Serial.begin(115200); //USB가 사용하고 있음. -> F12에서 보면 
-  Serial1.begin(115200,SERIAL_8N1,44,43); //PIN Rx 36, TX 37 아니면 IO = Rx 44,Tx 43
-  Serial2.begin(115200,SERIAL_8N1,15,16); // 추가로 UART1번 테스트 결과 잘됨 사용 가능할듯함.
 
-  pinMode(FLOW_485,OUTPUT);
+  
+
+  Serial.begin(115200); //USB가 사용하고 있음. -> F12에서 보면 
+
   pinMode(POWER_CTR,OUTPUT);
+  pinMode(Trig_SW,INPUT);
+  pinMode(Check_SW,INPUT);
+
   digitalWrite(POWER_CTR,HIGH);
+  
   
 }
 
 void loop() {
-  
-  // if(Serial1.available()){
-  //   Serial.println("ok");
-  //   delay(100);    
-  // }
 
-  // else {
-  //   Serial.println("no");
-  //   delay(100);
-  // }
-  Serial2.println('A');
-  Serial1.print('A');
 
-  delay(100);
+  Trig = digitalRead(Trig_SW);
+  Check =digitalRead(Check_SW);
 
+  Serial.print(Trig);
+  Serial.print(Check);
+
+  delay(1000);
 }
+
+
