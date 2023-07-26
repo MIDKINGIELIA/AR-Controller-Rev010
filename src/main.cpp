@@ -80,7 +80,7 @@ void t1_Main(void *arg){ //테스크1 함수
 
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_0,0);
 
-    if(digitalRead(Trig_SW)==LOW){
+    if(digitalRead(GPIO_NUM_0)==LOW){
       delay(500);
       esp_deep_sleep_start();
     }
