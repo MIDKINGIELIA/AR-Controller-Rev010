@@ -8,7 +8,7 @@
 #define Check_SW 41
 
 
-
+void sleep_on_time(int time);
 void t1_Main(void *arg);
 // void t3_Main(void *arg);
 void t2_Main(void *arg);
@@ -73,17 +73,18 @@ void setup() {
 }
 void t1_Main(void *arg){ //테스크1 함수
 
+int time = millis();
   while(1) {
     i++;
     Serial.println(i);
     vTaskDelay(1000);
 
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_0,0);
-
-    if(digitalRead(GPIO_NUM_0)==LOW){
-      delay(500);
-      esp_deep_sleep_start();
-    }
+    sleep_on_time(1000);
+    // if(digitalRead(GPIO_NUM_0)==LOW){
+    //   delay(500);
+    //   esp_deep_sleep_start();
+    // }
 
 
   }
@@ -118,3 +119,24 @@ void t2_Main(void *arg){ //테스크2 함수
 
 
 void loop() {}
+
+void sleep_on_time(int time){
+  unsigned long CurrentTime,AfterTime=0;
+
+  if(digitalRead(GPIO_NUM_0)==LOW){
+    CurrentTime = millis(); //현제 시간
+    
+    while(digitalRead(GPIO_NUM_0)==LOW){} //누르고 있을때 while에 갖힘. 
+
+    AfterTime = millis() - CurrentTime; //현제 시간 - 과거 시간 
+    Serial.println(AfterTime); //몇초인지 출력
+
+  if(AfterTime>=time){ //time에 들어가는 값에 따라 몇초동안 눌러야 켜지는지 정해짐 ..너무 오래 누르고 있으면(bootpin 특정사항)리부팅이 될수도 있음?... 이해가 잘 안되긴함..다른핀으로 테스트 해봐야함...
+      delay(4000); //다른핀으로 테스트 하고 나서 진행예정
+      esp_deep_sleep_start();
+    }
+  }
+}
+
+
+
